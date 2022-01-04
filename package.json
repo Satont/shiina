@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.7.0",
+    "date-fns": "^2.11.1",
+    "gray-matter": "^4.0.2",
+    "nanoid": "^3.1.30",
+    "next": "latest",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "remark": "^14.0.1",
+    "remark-html": "^15.0.0",
+    "swr": "^1.1.2",
+    "zod": "^3.11.6"
+  },
+  "devDependencies": {
+    "@types/node": "^16.3.3",
+    "@types/react": "^17.0.14",
+    "prisma": "^3.7.0",
+    "typescript": "^4.3.5"
+  }
+}
