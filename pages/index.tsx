@@ -16,7 +16,6 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const request = await fetch(`/api/links/new`, {
       method: 'POST',
       body: JSON.stringify({
@@ -51,7 +50,7 @@ export default function Home() {
           <input type="text" placeholder="Enter link" required name="" id="" {...link} />
           <input type="text" placeholder="Enter secret for link" name="" id="" {...secret} />
           <label htmlFor="oneTime">One time</label>
-          <input type="checkbox" id="oneTime" onChange={() => setOneTime(!!oneTime)} />
+          <input type="checkbox" id="oneTime" onChange={() => setOneTime(!oneTime)} />
 
           <button type="submit" className="submit">Create</button>
         </form>

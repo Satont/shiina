@@ -59,6 +59,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(401).json({ error: `Your secret is wrong for that link.` })
       }
 
+      console.log(link, await prisma.linksUsage.count({ where: { linkId: link.id }}))
+
       if (link.oneTime && await prisma.linksUsage.count({ where: { linkId: link.id }})) {
         return res.status(401).json({ error: 'This link already used.' })
       }
