@@ -2,7 +2,6 @@ import Layout from '../../components/layout'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import { Link as DbLink } from '@prisma/client' 
-import utilStyles from '../../styles/utils.module.css'
 
 async function fetcher(url: string) {
   const res = await fetch(url)
@@ -25,7 +24,7 @@ export default function Link() {
     <Layout>
       {error ? 
       <>
-        <div className={utilStyles.center} style={{ color: '#bf4d3e' }}>{error.message}</div>
+        <div style={{ color: '#bf4d3e' }}>{error.message}</div>
       </> : 
       <>
         {window.location.replace(data.link)}

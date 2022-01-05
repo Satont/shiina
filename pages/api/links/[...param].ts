@@ -1,15 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient } from '@prisma/client'
 import { z, ZodError } from 'zod'
 import { nanoid } from 'nanoid'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime'
 import prisma from '../../../lib/prisma'
-
-/* const createPrisma = async () => {
-  const prisma = new PrismaClient()
-  await prisma.$connect()
-  return prisma
-} */
 
 const newLink = z.object({
   link: z

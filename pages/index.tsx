@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import Layout from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
+import Image from 'next/image'
 
 const useFormField = (initialValue: string = '') => {
   const [value, setValue] = useState(initialValue);
@@ -34,29 +34,50 @@ export default function Home() {
 
   return (
     <Layout home>
-      {/* <Head>
-        <title style={{color: '#fffff'}}>{siteTitle}</title>
-      </Head> */}
-     {/*  <section className={`${utilStyles.headingMd} ${layoutStyles.header}`}>
-        <p>Simple </p>
-        <p>
-          (This is a sample website - you’ll be building a site like this in{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
-      </section> */}
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px} ${utilStyles.center}`} style={{color: '#cccccc'}}>
-        <h4 className={utilStyles.headingLg}>Create new short link</h4>
-        <form onSubmit={handleSubmit} className={utilStyles.center}>
-          <input type="text" placeholder="Enter link" required name="" id="" {...link} />
-          <input type="text" placeholder="Enter secret for link" name="" id="" {...secret} />
-          <label htmlFor="oneTime">One time</label>
-          <input type="checkbox" id="oneTime" onChange={() => setOneTime(!oneTime)} />
+      <div className='text-center hero-content'>
+        <div className='max-w-md'>
+          <div className='mb-5'>
+            <Image
+              priority
+              src="/images/profile.png"
+              height={144}
+              width={144}
+              className='rounded-full'
+            />
+            </div>
+          {/* <h1 className='mb-5 text-5xl font-bold'>{name}</h1> */}
+          <div className='form-control'>
+            <form onSubmit={handleSubmit}>
+              <input 
+                type="text"
+                placeholder="Link"
+                required
+                name=""
+                id="" {...link}
+                className='input input-bordered mb-5 text-lg select-none w-full'
+              />
 
-          <button type="submit" className="submit">Create</button>
-        </form>
+              <input 
+                type="text"
+                placeholder="Secret for link"
+                name=""
+                id=""
+                className="input input-bordered mb-5 text-lg select-none w-full"
+                {...secret} 
+              />
 
-        <h1>{!newLink ? '' : <><a href={newLink} target="_blank">{newLink}</a></>}</h1>
-      </section>
+              <label className="cursor-pointer label">
+                <span className="label-text">One time</span> 
+                <input type="checkbox" name="opt" className="checkbox" onChange={() => setOneTime(!oneTime)} value="" />
+              </label>
+
+              <button className="btn btn-success btn-block btn-outline mt-5" type="submit">Create</button>
+            </form>
+
+            <h1>{!newLink ? '' : <><a href={newLink} target="_blank">{newLink}</a></>}</h1>
+          </div>
+        </div>
+      </div>
     </Layout>
   )
 }
