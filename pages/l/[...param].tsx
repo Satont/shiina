@@ -16,7 +16,10 @@ async function fetcher(url: string) {
 
 export default function Link() {
   const { query } = useRouter()
-  const { data, error } = useSWR<DbLink>(() => `/api/links/${query.param[0]}/${query.param[1] ?? ''}`, fetcher)
+  const code = query.param[0]
+  const secretCode = query.param[1]
+  const secret = secretCode ? `/${secretCode}` : ''
+  const { data, error } = useSWR<DbLink>(() => `/api/links/${code}${secret}`, fetcher)
 
   if (!data && !error) return <div>Loading...</div>
 
