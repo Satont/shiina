@@ -3,12 +3,13 @@ import { PrismaClient } from '@prisma/client'
 import { z, ZodError } from 'zod'
 import { nanoid } from 'nanoid'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime'
+import prisma from '../../../lib/prisma'
 
-const createPrisma = async () => {
+/* const createPrisma = async () => {
   const prisma = new PrismaClient()
   await prisma.$connect()
   return prisma
-}
+} */
 
 const newLink = z.object({
   link: z
@@ -27,7 +28,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
       const body: Body = JSON.parse(req.body)
       await newLink.parseAsync(body)
-      const prisma = await createPrisma()
 
       const link = await prisma.link.create({
         data: {
@@ -38,7 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       return res.json(link)
     } else if (req.method === 'GET') {
-      const prisma = await createPrisma()
+      /* const prisma = await createPrisma() */
       const [id, secret] = req.query.param as string[]
 
       if (!id) {
