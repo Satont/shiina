@@ -68,12 +68,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(404).send({ error: 'Unknown request.'})
     }
   } catch (error) {
-
+    console.error(error)
     if (error instanceof ZodError) {
       res.status(500).json({ error: error.issues.map(i => i.message).join(', ') })
     } else if (error instanceof PrismaClientKnownRequestError) {
       if (error.message.includes('Unique')) {
         res.status(400).json({ error: 'This link already exists in database' })
+      } else {
+        res.status(500).json({ error: error.message })
       }
     } else {
       res.status(500).json({ error: error.message })
