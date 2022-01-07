@@ -27,7 +27,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   res.redirect(link.link)
-  await prisma.linksUsage.create({ 
+  
+  prisma.linksUsage.create({ 
     data: {
       linkId: link.id,
     }
