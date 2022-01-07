@@ -56,7 +56,7 @@ export default function Home() {
 
               <label className="cursor-pointer label">
                 <span className="label-text">One time</span> 
-                <input type="checkbox" name="opt" className="checkbox" checked={oneTime} onClick={() => setOneTime(!oneTime)} value="" />
+                <input type="checkbox" name="opt" className="checkbox" checked={oneTime} onChange={() => setOneTime(!oneTime)} value="" />
               </label>
 
               <button className="btn btn-success btn-block btn-outline mt-5" type="submit">Create</button>
