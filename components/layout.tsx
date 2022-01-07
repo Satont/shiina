@@ -29,14 +29,20 @@ export default function Layout({
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <main>{children}</main>
-      {/* {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
+      <div className='text-center hero-content'>
+        <div className='max-w-md'>
+        <div className='mb-5'>
+            <Image
+              priority
+              src="/images/profile.png"
+              height={144}
+              width={144}
+              className='rounded-full'
+            />
+          </div>
+          {children}
         </div>
-      )} */}
+      </div>
     </div>
   )
 }

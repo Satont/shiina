@@ -33,19 +33,7 @@ export default function Home() {
   };
 
   return (
-    <Layout home>
-      <div className='text-center hero-content'>
-        <div className='max-w-md'>
-          <div className='mb-5'>
-            <Image
-              priority
-              src="/images/profile.png"
-              height={144}
-              width={144}
-              className='rounded-full'
-            />
-            </div>
-          {/* <h1 className='mb-5 text-5xl font-bold'>{name}</h1> */}
+    <Layout>
           <div className='form-control'>
             <form onSubmit={handleSubmit}>
               <input 
@@ -76,8 +64,6 @@ export default function Home() {
 
             <h1>{!newLink ? '' : <><a href={newLink} target="_blank">{newLink}</a></>}</h1>
           </div>
-        </div>
-      </div>
     </Layout>
   )
 }
