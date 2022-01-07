@@ -5,7 +5,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const [id, secret] = req.query.param as string[]
 
   if (!id) {
-    return res.status(400).json({ error: 'You are using api wrong.' })
+    return res.redirect(`/error?message=Id of link not passed.`)
   }
 
   const link = await prisma.link.findFirst({
@@ -27,7 +27,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   res.redirect(link.link)
-  res.status(200).json(link)
   await prisma.linksUsage.create({ 
     data: {
       linkId: link.id,
