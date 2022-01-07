@@ -5,7 +5,7 @@ import Image from 'next/image'
 const useFormField = (initialValue: string = '') => {
   const [value, setValue] = useState(initialValue);
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value), []);
-  return { value, onChange };
+  return { value, onChange, setValue };
 };
 
 export default function Home() {
@@ -27,8 +27,8 @@ export default function Home() {
 
     const response = await request.json()
     setNewLink(`${window.origin}/l/${response.slug}${response.secret ? `/${response.secret}` : ''}`)
-    link.value = ''
-    secret.value = ''
+    link.setValue('')
+    secret.setValue('')
     setOneTime(false)
   };
 
@@ -56,7 +56,7 @@ export default function Home() {
 
               <label className="cursor-pointer label">
                 <span className="label-text">One time</span> 
-                <input type="checkbox" name="opt" className="checkbox" onChange={() => setOneTime(!oneTime)} value="" />
+                <input type="checkbox" name="opt" className="checkbox" checked={oneTime} onClick={() => setOneTime(!oneTime)} value="" />
               </label>
 
               <button className="btn btn-success btn-block btn-outline mt-5" type="submit">Create</button>
