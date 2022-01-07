@@ -62,7 +62,11 @@ export default function Home() {
               <button className="btn btn-success btn-block btn-outline mt-5" type="submit">Create</button>
             </form>
 
-            <h1>{!newLink ? '' : <><a href={newLink} target="_blank">{newLink}</a></>}</h1>
+            { newLink && 
+              <div className="alert alert-success mt-5 flex justify-center">
+                  <label><a href={newLink} target="_blank">{newLink}</a></label>
+              </div>
+            }
           </div>
     </Layout>
   )
