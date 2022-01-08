@@ -2,12 +2,14 @@ lockfileVersion: 5.3
 
 specifiers:
   '@prisma/client': ^3.7.0
+  '@types/lru-cache': ^5.1.1
   '@types/node': ^16.3.3
   '@types/react': ^17.0.14
   autoprefixer: ^10.4.1
   daisyui: ^1.21.0
   date-fns: ^2.11.1
   gray-matter: ^4.0.2
+  lru-cache: ^6.0.0
   nanoid: ^3.1.30
   next: latest
   postcss: ^8.4.5
@@ -26,6 +28,7 @@ dependencies:
   daisyui: 1.21.0
   date-fns: 2.28.0
   gray-matter: 4.0.3
+  lru-cache: 6.0.0
   nanoid: 3.1.30
   next: 12.0.7_react-dom@17.0.2+react@17.0.2
   react: 17.0.2
@@ -36,6 +39,7 @@ dependencies:
   zod: 3.11.6
 
 devDependencies:
+  '@types/lru-cache': 5.1.1
   '@types/node': 16.11.18
   '@types/react': 17.0.38
   autoprefixer: 10.4.1_postcss@8.4.5
@@ -312,6 +316,10 @@ packages:
     dependencies:
       '@types/unist': 2.0.6
     dev: false
+
+  /@types/lru-cache/5.1.1:
+    resolution: {integrity: sha512-ssE3Vlrys7sdIzs5LOxCzTVMsU7i9oa/IaW92wF32JFb3CVczqOkru2xspuKczHEbG3nvmPY7IFqVmGGHdNbYw==}
+    dev: true
 
   /@types/mdast/3.0.10:
     resolution: {integrity: sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==}
@@ -1530,6 +1538,13 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+    dev: false
+
+  /lru-cache/6.0.0:
+    resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
+    engines: {node: '>=10'}
+    dependencies:
+      yallist: 4.0.0
     dev: false
 
   /make-dir/3.1.0:
@@ -2871,6 +2886,10 @@ packages:
   /xtend/4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
     engines: {node: '>=0.4'}
+
+  /yallist/4.0.0:
+    resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
+    dev: false
 
   /yaml/1.10.2:
     resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}

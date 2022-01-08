@@ -3,6 +3,7 @@ import { z, ZodError } from 'zod'
 import { nanoid } from 'nanoid'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime'
 import prisma from '../../../lib/prisma'
+import rateLimiter from '../../../utils/rateLimit'
 
 const newLink = z.object({
   link: z
@@ -16,9 +17,18 @@ const newLink = z.object({
 
 type Body = Required<z.infer<typeof newLink>>
 
+const limiter = rateLimiter({
+  interval: 60 * 1000, // 60 seconds
+  uniqueTokenPerInterval: 500, // Max 500 users per second
+})
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === 'POST') {
+      if (limiter.check(res, 10, req.headers['x-real-ip'] as string)) {
+        return res.redirect(`/error?message=You are trying create links to often.`)
+      }
+
       const body: Body = JSON.parse(req.body)
       await newLink.parseAsync(body)
 
