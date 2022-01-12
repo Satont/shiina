@@ -1,35 +1,43 @@
 import { useCallback, useState } from 'react'
 import Layout from '../components/layout'
-import Image from 'next/image'
-
-const useFormField = (initialValue: string = '') => {
-  const [value, setValue] = useState(initialValue);
-  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value), []);
-  return { value, onChange, setValue };
-};
 
 export default function Home() {
-  const link = useFormField();
-  const secret = useFormField();
+  const [link, setLink] = useState('');
+  const onLinkChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value), []);
+  const [secret, setSecret] = useState('');
+  const onSecretChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setSecret(e.target.value), []);
+
   const [oneTime, setOneTime] = useState(false)
   const [newLink, setNewLink] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    setNewLink('')
+    setError('')
+
     const request = await fetch(`/api/links/new`, {
       method: 'POST',
       body: JSON.stringify({
-        link: link.value,
-        secret: secret.value,
+        link,
+        secret,
         oneTime,
       })
     })
 
     const response = await request.json()
-    setNewLink(`${window.origin}/l/${response.slug}${response.secret ? `/${response.secret}` : ''}`)
-    link.setValue('')
-    secret.setValue('')
-    setOneTime(false)
+
+    if (request.ok) {
+      setNewLink(`${window.origin}/l/${response.slug}${response.secret ? `/${response.secret}` : ''}`)
+      setLink('')
+      setSecret('')
+      setOneTime(false)
+    } else {
+      if (response) {
+        setError(response.error)
+      }
+    }
   };
 
   return (
@@ -41,7 +49,8 @@ export default function Home() {
                 placeholder="Link"
                 required
                 name=""
-                id="" {...link}
+                id="" 
+                onChange={onLinkChange}
                 className='input input-bordered mb-5 text-lg select-none w-full'
               />
 
@@ -51,7 +60,7 @@ export default function Home() {
                 name=""
                 id=""
                 className="input input-bordered mb-5 text-lg select-none w-full"
-                {...secret} 
+                onChange={onSecretChange}
               />
 
               <label className="cursor-pointer label">
@@ -63,8 +72,17 @@ export default function Home() {
             </form>
 
             { newLink && 
-              <div className="alert alert-success mt-5 flex justify-center">
-                  <label><a href={newLink} target="_blank">{newLink}</a></label>
+              <div className={`alert alert-success mt-5 flex justify-center`}>
+                  <label>
+                    <a href={newLink} target="_blank">{newLink}</a>
+                  </label>
+              </div>
+            }
+            { error && 
+              <div className={`alert alert-error mt-5 flex justify-center`}>
+                  <label>
+                    {error}
+                  </label>
               </div>
             }
           </div>
