@@ -6,7 +6,7 @@ import prisma from '../../../lib/prisma';
 import rateLimiter from '../../../utils/rateLimit';
 
 const newLink = z.object({
-  link: z.string().refine((val) => ['http:', 'https:'].some((protocol) => new URL(val).protocol == 'protocol'), {
+  link: z.string().refine((val) => ['http:', 'https:'].some((protocol) => new URL(val).protocol == protocol), {
     message: 'Invalid link. Link should start from http or https.',
   }),
   oneTime: z.boolean(),
